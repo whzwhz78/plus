@@ -36,4 +36,7 @@ tuya-znkz\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 tuya-znkz\main.o: ../Inc/i2c.h
 tuya-znkz\main.o: ../Inc/usart.h
 tuya-znkz\main.o: ../Inc/gpio.h
-tuya-znkz\main.o: ..\tuya\sht30_i2c.h
+tuya-znkz\main.o: ..\SHT20\SHT2x.h
+tuya-znkz\main.o: ..\SYSTEM\sys\sys.h
+tuya-znkz\main.o: ..\OLED\oled.h
+tuya-znkz\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

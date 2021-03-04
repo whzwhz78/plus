@@ -25,11 +25,15 @@
 #include "gpio.h"
 #include "wifi.h"
 #include "stm32f1xx_hal.h"
-#include "sht30_i2c.h"
+#include "SHT2x.h"
+#include "oled.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+  uint8_t i = 0; 
+	uint8_t t = 0;
+  float temp;//温度
+	float	Humi;//湿度
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,13 +103,19 @@ int main(void)
   /* USER CODE BEGIN 2 */
   wifi_protocol_init();
   /* USER CODE END 2 */
-
+ 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
    wifi_uart_service();
+		//温湿度采集
+  	temp=SHT2x_GetTempPoll();//获取SHT20 温度
+		Humi=SHT2x_GetHumiPoll();//获取SHT20 湿度
+		//温湿度上报
+		mcu_dp_value_update(1,(long)temp*10); //温度数据上报，采集的 float 数据转换为 long;
+    mcu_dp_value_update(2,(long)Humi); //湿度数据上报，float 转换为 long ;	
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
